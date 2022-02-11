@@ -27,7 +27,8 @@ namespace RapidPayAPI.Services.CardManagement
 
                     db.RPCards.Add(new RPCard() { 
                         CardNumber = CardNumber,
-                        CreditLimit = CreditLimit
+                        CreditLimit = CreditLimit,
+                        Balance = CreditLimit
                     });
 
                     await db.SaveChangesAsync();
@@ -56,25 +57,22 @@ namespace RapidPayAPI.Services.CardManagement
 
                     double creditLimit = (double)card.CreditLimit;
 
-                    double balance = (double)card.Balance;
+                    double balance = (double)card.Balance;                    
 
-                    double feeAmount = Math.Round(Fee * (double)Amount, 2);
-
-                    if (balance + feeAmount + (double)Amount > creditLimit)
+                    if (balance - (Fee + (double)Amount) < 0)
                         return "Insufficient funds/over credit limit.";                    
 
                     db.RPPayments.Add(new RPPayment()
                     {
                         Card = CardNumber,
                         Amount = Amount,
-                        Fee = (decimal)Fee * 100,
-                        FeeAmount = (decimal)feeAmount,
-                        TotalAmount = Amount + (decimal)feeAmount,
+                        Fee = (decimal)Fee,                        
+                        TotalAmount = Amount + (decimal)Fee,
                         CreatedDateTime = DateTime.Now
                     });
 
                     //update balance
-                    card.Balance = card.Balance + Amount + (decimal)feeAmount;
+                    card.Balance = card.Balance - (Amount + (decimal)Fee);
 
                     await db.SaveChangesAsync();
                     return "OK";

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using RapidPayAPI.Services.PaymentFee;
+using RapidPayAPI.Models;
 
 namespace RapidPayAPI.Controllers
 {
@@ -29,16 +30,16 @@ namespace RapidPayAPI.Controllers
                 var response = await _service.CreateCard(CardNumber, CreditLimit);
                 if (response != "OK")
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, $"Create card method failed. {response}");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = $"Create card method failed. {response}" });
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Card added sucessfully.");
+                    return Request.CreateResponse(HttpStatusCode.OK, new ResultModel() { Result = "Card added sucessfully." });
                 }
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, $"There was a problem with the request. {ex.Message}");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = $"There was a problem with the request. {ex.Message}" });
             }
         }
 
@@ -47,12 +48,12 @@ namespace RapidPayAPI.Controllers
         public async Task<HttpResponseMessage> GetFee()
         {
             try
-            {                
-                return Request.CreateResponse(HttpStatusCode.OK,  $"payment fee {_paymentFee.GetFee()} at {DateTime.Now}. Last update {_paymentFee.GetLastUpdateDatetime()}.");               
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new ResultModel() { Result = $"payment fee {_paymentFee.GetFee()} at {DateTime.Now}. Last update {_paymentFee.GetLastUpdateDatetime()}." });
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, $"There was a problem with the request. {ex.Message}");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = $"There was a problem with the request. {ex.Message}" });
             }
         }
 
@@ -62,19 +63,19 @@ namespace RapidPayAPI.Controllers
         {
             try
             {
-                var response = await _service.Pay(CardNumber, Amount, _paymentFee.GetFee() / 100);
+                var response = await _service.Pay(CardNumber, Amount, Math.Round(_paymentFee.GetFee(), 2));
                 if (response != "OK")
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, $"Pay method failed. {response}");
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = $"Pay method failed. {response}" });
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Payment created sucessfully.");
+                    return Request.CreateResponse(HttpStatusCode.OK, new ResultModel() { Result = "Payment created sucessfully." });
                 }
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, $"There was a problem with the request. {ex.Message}");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = $"There was a problem with the request. {ex.Message}" });
             }
         }
 
@@ -87,13 +88,13 @@ namespace RapidPayAPI.Controllers
                 var response = await _service.GetBalance(CardNumber);
 
                 if (response == null)
-                    return Request.CreateResponse(HttpStatusCode.OK, $"The balance for the card {CardNumber} is not found.");
+                    return Request.CreateResponse(HttpStatusCode.OK, new ResultModel() { Result = $"The balance for the card {CardNumber} is not found." });
 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new ResultModel() { Result = ex.Message });
             }
         }
     }

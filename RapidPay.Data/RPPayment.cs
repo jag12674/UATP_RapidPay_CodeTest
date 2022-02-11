@@ -18,7 +18,6 @@ namespace RapidPay.Data
         public string Card { get; set; }
         public decimal Amount { get; set; }
         public decimal Fee { get; set; }
-        public decimal FeeAmount { get; set; }
         public decimal TotalAmount { get; set; }
         public System.DateTime CreatedDateTime { get; set; }
     

@@ -13,9 +13,9 @@ namespace RapidPayAPI.Controllers
     {
         [HttpGet]
         [Route("Encrypt")]
-        public string Encrypt(string value)
+        public ResultModel Encrypt(string value)
         {
-            return UtilityModel.CreateSHA512(UtilityModel.CreateMD5(value));
+            return new ResultModel() { Result = UtilityModel.CreateSHA512(UtilityModel.CreateMD5(value)) };
         }
     }
 }

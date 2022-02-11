@@ -21,7 +21,6 @@
           <Property Name="Card" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
           <Property Name="Fee" Type="decimal" Precision="14" Scale="12" Nullable="false" />
-          <Property Name="FeeAmount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
           <Property Name="TotalAmount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
           <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -92,7 +91,6 @@
           <Property Name="Card" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
           <Property Name="Fee" Type="Decimal" Nullable="false" Precision="14" Scale="12" />
-          <Property Name="FeeAmount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
           <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="RPCard" Relationship="RapidPayModel.FK_RPPayment_RPPayment" FromRole="RPPayment" ToRole="RPCard" />
@@ -138,7 +136,6 @@
               <MappingFragment StoreEntitySet="RPPayment">
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
                 <ScalarProperty Name="Fee" ColumnName="Fee" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Card" ColumnName="Card" />

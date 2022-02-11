@@ -1,6 +1,6 @@
 USE [RapidPay]
 GO
-/****** Object:  Table [dbo].[RPCard]    Script Date: 2/11/2022 10:35:27 AM ******/
+/****** Object:  Table [dbo].[RPCard]    Script Date: 2/11/2022 3:58:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[RPCard](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RPPayment]    Script Date: 2/11/2022 10:35:27 AM ******/
+/****** Object:  Table [dbo].[RPPayment]    Script Date: 2/11/2022 3:58:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +25,6 @@ CREATE TABLE [dbo].[RPPayment](
 	[Card] [varchar](15) NOT NULL,
 	[Amount] [decimal](14, 2) NOT NULL,
 	[Fee] [decimal](14, 12) NOT NULL,
-	[FeeAmount] [decimal](14, 2) NOT NULL,
 	[TotalAmount] [decimal](14, 2) NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
  CONSTRAINT [PK_RPPayment] PRIMARY KEY CLUSTERED 
@@ -34,7 +33,7 @@ CREATE TABLE [dbo].[RPPayment](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RPUsers]    Script Date: 2/11/2022 10:35:27 AM ******/
+/****** Object:  Table [dbo].[RPUsers]    Script Date: 2/11/2022 3:58:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
