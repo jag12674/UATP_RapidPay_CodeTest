@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "07e6bc5f-5f60-4ab1-a4da-1375ecd0082b",
+		"name": "CardManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateCard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer VhP8XgFtOlRsCPwHDwhf1xA4IC7G7y9bvg2hlllnHS0mrB5cvpuSn_tt7EwpzoLXlWLRSKP8yFQ9yDWIABjMIvmUE-wKcY9W5ddfc6leLnScpVyI8YeNczdu0jGxgfa7ylDiuunQgYVXIgK34BZr_lviyU3ZInihFvnVbg-qR5mZENjXpTJX4FF8E2OIi-rSaGD2qXFHtN1DpTMs51B_3WphW0O0tC_dsc_4NBrSrcrJYlhjqbYpMzoqytWHPzdiVmprqTV1vKqsR995dgWzyhwGex8DifPAvgOVvaMbUVdJGTxVWdE1KT2fJbXClD_gFT_ZMJSLmgCQnwhTzNtu1Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44313/api/CardManagement/CreateCard?CardNumber=123456789000099&CreditLimit=10000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"CardManagement",
+						"CreateCard"
+					],
+					"query": [
+						{
+							"key": "CardNumber",
+							"value": "123456789000099"
+						},
+						{
+							"key": "CreditLimit",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer 4-y4mqDrDmiPilZDFy98bihbKoAGSYQ7c7LkyqyIS5SZaqPTE_8aBP0jwQm_6MpeIyVIs5Hr0HwN3mdkWVlQ-L_IgS5vYPB5odh8rrqGMGtaM25uacp_goRradqmB4FyPzkE9g9gwsGFv9Lv-yoBSMqFMELN1OBO1H4rpzDyxcpVGJS1-vN23cjaFFdIQ9aTZVN5fMyMpY6_xsVc644V_ecvXkiEMR02vADNL4R2-EnPw43RMXKRdp39gNHP9EjAtJMfSuHDyuGyGcX-KDhAg68aLb7jYHL4YnYpYbprJO1oFBcnLGmoB7r9pBY1ACdBfsdMt_SAchPYtNVo7E1ikQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44313/api/CardManagement/GetFee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"CardManagement",
+						"GetFee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer G593DeoQop9pG3DXOj3H6UJHU_1qyugoFCYXL8WCPWRJk1DfTkwnTEO2VgXX2PXneaGe0lmAcx8mHWgw0oBbwhxtGbLLnsM_MqnFQ35LEgRQ3H-FApcLT-fOr1U7o_K32F4YEoScxU36aSuXOIC4iAjz3eB7HB3nPhtTGpv4mY3RQZSkBkOhlTCvbFXUhXguD7vQMNjIwRrLjdxkvK0hnaqwEXd0Kh27G7fwCqQRCpYn_TKZYgrRz9m2hd4ftFsRyULgzXrS0zFdKAN6dPr80sKfKuk7p6yhFS7fHcpKxH3X_HT6Jawyz-IOcyDkiPRtBe_ie3pN_TRh3mDslX8hcg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44313/api/CardManagement/Pay?CardNumber=123456789000002&Amount=97.5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"CardManagement",
+						"Pay"
+					],
+					"query": [
+						{
+							"key": "CardNumber",
+							"value": "123456789000002"
+						},
+						{
+							"key": "Amount",
+							"value": "97.5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBalance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "bearer G593DeoQop9pG3DXOj3H6UJHU_1qyugoFCYXL8WCPWRJk1DfTkwnTEO2VgXX2PXneaGe0lmAcx8mHWgw0oBbwhxtGbLLnsM_MqnFQ35LEgRQ3H-FApcLT-fOr1U7o_K32F4YEoScxU36aSuXOIC4iAjz3eB7HB3nPhtTGpv4mY3RQZSkBkOhlTCvbFXUhXguD7vQMNjIwRrLjdxkvK0hnaqwEXd0Kh27G7fwCqQRCpYn_TKZYgrRz9m2hd4ftFsRyULgzXrS0zFdKAN6dPr80sKfKuk7p6yhFS7fHcpKxH3X_HT6Jawyz-IOcyDkiPRtBe_ie3pN_TRh3mDslX8hcg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:44313/api/CardManagement/GetBalance?CardNumber=123456789000099",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"CardManagement",
+						"GetBalance"
+					],
+					"query": [
+						{
+							"key": "CardNumber",
+							"value": "123456789000099"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

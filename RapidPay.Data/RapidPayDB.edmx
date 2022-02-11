@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RapidPayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RPCard">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="CreditLimit" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RPPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Card" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="Fee" Type="decimal" Precision="14" Scale="12" Nullable="false" />
+          <Property Name="FeeAmount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RPUsers">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RPPayment_RPPayment">
+          <End Role="RPCard" Type="Self.RPCard" Multiplicity="1" />
+          <End Role="RPPayment" Type="Self.RPPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RPCard">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="RPPayment">
+              <PropertyRef Name="Card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RapidPayModelStoreContainer">
+          <EntitySet Name="RPCard" EntityType="Self.RPCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RPPayment" EntityType="Self.RPPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RPUsers" EntityType="Self.RPUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_RPPayment_RPPayment" Association="Self.FK_RPPayment_RPPayment">
+            <End Role="RPCard" EntitySet="RPCard" />
+            <End Role="RPPayment" EntitySet="RPPayment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RapidPayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RPCard">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="CreditLimit" Type="Decimal" Precision="14" Scale="2" Nullable="false" />
+          <NavigationProperty Name="RPPayments" Relationship="RapidPayModel.FK_RPPayment_RPPayment" FromRole="RPCard" ToRole="RPPayment" />
+        </EntityType>
+        <EntityType Name="RPUser">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RapidPayEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RPCards" EntityType="Self.RPCard" />
+          <EntitySet Name="RPUsers" EntityType="Self.RPUser" />
+          <EntitySet Name="RPPayments" EntityType="RapidPayModel.RPPayment" />
+          <AssociationSet Name="FK_RPPayment_RPPayment" Association="RapidPayModel.FK_RPPayment_RPPayment">
+            <End Role="RPCard" EntitySet="RPCards" />
+            <End Role="RPPayment" EntitySet="RPPayments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RPPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Card" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="Fee" Type="Decimal" Nullable="false" Precision="14" Scale="12" />
+          <Property Name="FeeAmount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RPCard" Relationship="RapidPayModel.FK_RPPayment_RPPayment" FromRole="RPPayment" ToRole="RPCard" />
+        </EntityType>
+        <Association Name="FK_RPPayment_RPPayment">
+          <End Type="RapidPayModel.RPCard" Role="RPCard" Multiplicity="1" />
+          <End Type="RapidPayModel.RPPayment" Role="RPPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RPCard">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="RPPayment">
+              <PropertyRef Name="Card" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RapidPayModelStoreContainer" CdmEntityContainer="RapidPayEntities">
+          <EntitySetMapping Name="RPCards">
+            <EntityTypeMapping TypeName="RapidPayModel.RPCard">
+              <MappingFragment StoreEntitySet="RPCard">
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RPUsers">
+            <EntityTypeMapping TypeName="RapidPayModel.RPUser">
+              <MappingFragment StoreEntitySet="RPUsers">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RPPayments">
+            <EntityTypeMapping TypeName="RapidPayModel.RPPayment">
+              <MappingFragment StoreEntitySet="RPPayment">
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="FeeAmount" ColumnName="FeeAmount" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Card" ColumnName="Card" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

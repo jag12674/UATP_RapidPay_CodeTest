@@ -1,0 +1,56 @@
+USE [RapidPay]
+GO
+/****** Object:  Table [dbo].[RPCard]    Script Date: 2/11/2022 10:35:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RPCard](
+	[CardNumber] [varchar](15) NOT NULL,
+	[Balance] [decimal](14, 2) NOT NULL,
+	[CreditLimit] [decimal](14, 2) NOT NULL,
+ CONSTRAINT [PK_RPCard] PRIMARY KEY CLUSTERED 
+(
+	[CardNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RPPayment]    Script Date: 2/11/2022 10:35:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RPPayment](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Card] [varchar](15) NOT NULL,
+	[Amount] [decimal](14, 2) NOT NULL,
+	[Fee] [decimal](14, 12) NOT NULL,
+	[FeeAmount] [decimal](14, 2) NOT NULL,
+	[TotalAmount] [decimal](14, 2) NOT NULL,
+	[CreatedDateTime] [datetime] NOT NULL,
+ CONSTRAINT [PK_RPPayment] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RPUsers]    Script Date: 2/11/2022 10:35:27 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RPUsers](
+	[username] [varchar](128) NOT NULL,
+	[password] [varchar](128) NOT NULL,
+	[active] [bit] NOT NULL,
+ CONSTRAINT [PK_RPUsers] PRIMARY KEY CLUSTERED 
+(
+	[username] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[RPPayment]  WITH CHECK ADD  CONSTRAINT [FK_RPPayment_RPPayment] FOREIGN KEY([Card])
+REFERENCES [dbo].[RPCard] ([CardNumber])
+GO
+ALTER TABLE [dbo].[RPPayment] CHECK CONSTRAINT [FK_RPPayment_RPPayment]
+GO

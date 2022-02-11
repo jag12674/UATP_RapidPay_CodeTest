@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "01fefca1-450e-4aba-9cbe-2b9fe33cacc6",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "06a5b881378c4f8beeab11038890d44d84a98b1640dc2562c77566bae13d3b1eb1c7f7c3ed7bf15a764dc8babde0d5685e0b6b6d368fc58a20262b0687a5dd46",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "511d86ee2ab8b049118b2e836c2d6afacb8193a0d475b84e66e6202bf4c26032945f2f2b3953725e3e01e122b470135c4ca803e0d4dfed7ccf4e38fdea8e8011",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:44313/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

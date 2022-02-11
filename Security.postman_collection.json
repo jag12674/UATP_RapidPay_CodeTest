@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "352b8cc7-7ce1-41a5-b7e7-31df5d0c5962",
+		"name": "Security",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Encrypt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:44313/api/Security/Encrypt?value=RapidPay_ApiUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "44313",
+					"path": [
+						"api",
+						"Security",
+						"Encrypt"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "Password@1",
+							"disabled": true
+						},
+						{
+							"key": "value",
+							"value": "RapidPay_ApiUser"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
